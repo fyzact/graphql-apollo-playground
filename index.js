@@ -1,6 +1,5 @@
  const { ApolloServer, gql }= require('apollo-server');
- const data = require("./data/sessions.json")
- 
+ const {SessionApi} = require("./datasources/sessions");
  var typeDefs=gql`
  type Query{
      sessions:[Session]
@@ -16,17 +15,22 @@
      format:String
      track:String @deprecated(reason:"this field is going to be away soon")
      level:String
- }
- `
+ } `
+
+ const dataSources=()=>({
+     SessionApi:new SessionApi()
+ });
+
   const resolvers={
     Query:{
-        sessions:()=>{
-            return data;
+        sessions:(parent,args,{dataSources},info)=>{
+            console.log(parent);
+            return  dataSources.SessionApi.getSessions();
         }
     }
  };
 
-var apolloServer=new ApolloServer({typeDefs,resolvers:resolvers});
+var apolloServer=new ApolloServer({typeDefs,resolvers,dataSources});
 apolloServer.listen({
  port:process.env.port || 4000
 }).then((serverInfo)=>{
