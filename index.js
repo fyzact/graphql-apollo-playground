@@ -7,14 +7,14 @@
  }
  type Session{
      id:ID!
-     title:String!
+     title:String! 
      description:String
      startAt:String
      endsAt:String
      room:String
      day:String
      format:String
-     track:String
+     track:String @deprecated(reason:"this field is going to be away soon")
      level:String
  }
  `
