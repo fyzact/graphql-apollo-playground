@@ -3,6 +3,7 @@
  var typeDefs=gql`
  type Query{
      sessions:[Session]
+    sessionById (id:ID): Session
  }
  type Session{
      id:ID!
@@ -26,9 +27,13 @@
         sessions:(parent,args,{dataSources},info)=>{
             console.log(parent);
             return  dataSources.SessionApi.getSessions();
+        },
+        sessionById:(parent,{id},{dataSources},info)=>{
+            console.log(parent);
+            return  dataSources.SessionApi.getSessionById(id);
         }
     }
- };
+ }
 
 var apolloServer=new ApolloServer({typeDefs,resolvers,dataSources});
 apolloServer.listen({

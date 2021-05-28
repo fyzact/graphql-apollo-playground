@@ -12,6 +12,12 @@ class SessionApi extends DataSource{
     getSessions(){
         return data;
     }
+    getSessionById(id){
+        /*
+        you can use lodash
+        */
+      return  data.filter(p=>p.id==parseInt(id))[0];
+    }
 }
 
 module.exports={SessionApi}
