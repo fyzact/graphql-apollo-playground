@@ -1,51 +1,12 @@
- const { ApolloServer, gql }= require('apollo-server');
+ const { ApolloServer }= require('apollo-server');
  const {SessionApi} = require("./datasources/sessions");
- var typeDefs=gql`
- type Query{
-     sessions (
-        id:ID
-     title:String
-     description:String
-     startAt:String
-     endsAt:String
-     room:String
-     day:String
-     format:String
-     track:String
-     level:String
-
-     ):[Session]
-    sessionById (id:ID): Session
- }
- type Session{
-     id:ID!
-     title:String! 
-     description:String
-     startAt:String
-     endsAt:String
-     room:String
-     day:String
-     format:String
-     track:String @deprecated(reason:"this field is going to be away soon")
-     level:String
- } `
+ var typeDefs=require("./schema")
 
  const dataSources=()=>({
      SessionApi:new SessionApi()
  });
 
-  const resolvers={
-    Query:{
-        sessions:(parent,args,{dataSources},info)=>{
-            console.log(parent);
-            return  dataSources.SessionApi.getSessions(args);
-        },
-        sessionById:(parent,{id},{dataSources},info)=>{
-            console.log(parent);
-            return  dataSources.SessionApi.getSessionById(id);
-        }
-    }
- }
+  const resolvers=require("./resolvers");
 
 var apolloServer=new ApolloServer({typeDefs,resolvers,dataSources});
 apolloServer.listen({
