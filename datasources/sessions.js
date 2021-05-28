@@ -9,8 +9,9 @@ class SessionApi extends DataSource{
     initialize(config){
 
     }
-    getSessions(){
-        return data;
+    getSessions(args){
+        console.log("arg",args)
+        return _.filter(data,args)
     }
     getSessionById(id){
     

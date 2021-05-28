@@ -2,7 +2,19 @@
  const {SessionApi} = require("./datasources/sessions");
  var typeDefs=gql`
  type Query{
-     sessions:[Session]
+     sessions (
+        id:ID
+     title:String
+     description:String
+     startAt:String
+     endsAt:String
+     room:String
+     day:String
+     format:String
+     track:String
+     level:String
+
+     ):[Session]
     sessionById (id:ID): Session
  }
  type Session{
@@ -26,7 +38,7 @@
     Query:{
         sessions:(parent,args,{dataSources},info)=>{
             console.log(parent);
-            return  dataSources.SessionApi.getSessions();
+            return  dataSources.SessionApi.getSessions(args);
         },
         sessionById:(parent,{id},{dataSources},info)=>{
             console.log(parent);
