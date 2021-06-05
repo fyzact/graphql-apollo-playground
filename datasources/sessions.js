@@ -20,12 +20,10 @@ class SessionApi extends DataSource{
     const sessions=_.filter(data,{id:parseInt(id)});
     return sessions[0];
     }
-    getSpeackers(){
-
-    }
-
-    getSpeakerById(id){
-        
+    toogleFavoriteSession(id){
+        const sessions=_.filter(data,{id:parseInt(id)});
+        sessions[0].favorite=!sessions[0].favorite;
+        return sessions[0];
     }
 }
 
