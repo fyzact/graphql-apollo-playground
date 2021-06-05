@@ -25,6 +25,12 @@ class SessionApi extends DataSource{
         sessions[0].favorite=!sessions[0].favorite;
         return sessions[0];
     }
+    addNewSession(session){
+        session.id=13;
+        data.push(session);
+        console.log(session);
+        return session;
+    }
 }
 
 module.exports={SessionApi}
