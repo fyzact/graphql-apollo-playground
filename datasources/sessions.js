@@ -20,6 +20,13 @@ class SessionApi extends DataSource{
     const sessions=_.filter(data,{id:parseInt(id)});
     return sessions[0];
     }
+    getSpeackers(){
+
+    }
+
+    getSpeakerById(id){
+        
+    }
 }
 
 module.exports={SessionApi}

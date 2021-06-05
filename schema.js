@@ -15,6 +15,9 @@ type Query{
 
     ):[Session]
    sessionById (id:ID): Session
+   speakers:[Speaker]
+   speakerById(id:ID):Speaker
+
 }
 type Session{
     id:ID!
@@ -27,4 +30,14 @@ type Session{
     format:String
     track:String @deprecated(reason:"this field is going to be away soon")
     level:String
-} `
+    speakers:[Speaker]
+} 
+
+type Speaker{
+    id:ID!
+    bio:String
+    name:String
+   
+}
+
+`

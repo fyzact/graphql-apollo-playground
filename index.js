@@ -1,13 +1,16 @@
  const { ApolloServer }= require('apollo-server');
  const {SessionApi} = require("./datasources/sessions");
+ const resolvers=require("./resolvers");
+ const SpeakerApi = require('./datasources/speakers');
+ 
  var typeDefs=require("./schema")
 
  const dataSources=()=>({
-     SessionApi:new SessionApi()
+     sessionApi:new SessionApi(),
+     speakerApi:new SpeakerApi()
  });
 
-  const resolvers=require("./resolvers");
-
+ 
 var apolloServer=new ApolloServer({typeDefs,resolvers,dataSources});
 apolloServer.listen({
  port:process.env.port || 4000
