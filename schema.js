@@ -19,8 +19,22 @@ type Query{
    speakerById(id:ID):Speaker
 
 }
+input SessionInput{
+
+    title:String! 
+    description:String
+    startAt:String
+    endsAt:String
+    room:String
+    day:String
+    format:String
+    favorite:Boolean
+    track:String @deprecated(reason:"this field is going to be away soon")
+    level:String
+}
 type Mutation{
     toogleFavoriteSession(id:ID):Session
+    addNewSession(session:SessionInput):Session
 }
 type Session{
     id:ID!
