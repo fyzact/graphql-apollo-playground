@@ -1,4 +1,4 @@
- const { ApolloServer }= require('apollo-server');
+ const { ApolloServer, ApolloError }= require('apollo-server');
  const {SessionApi} = require("./datasources/sessions");
  const resolvers=require("./resolvers");
  const SpeakerApi = require('./datasources/speakers');
@@ -15,7 +15,14 @@ var apolloServer=new ApolloServer({
     typeDefs,
     resolvers,
     dataSources,
-    debug:false
+    // debug:false,
+    formatError:(err)=>{
+        console.log(err);
+        if(err.extensions.code=="INTERNAL_SERVER_ERROR"){
+            
+            return new ApolloError("we are having some trouble","ERROR",{correlationId:"uniqueId"});
+        }
+    }
 });
 apolloServer.listen({
  port:process.env.port || 4000
