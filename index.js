@@ -11,7 +11,12 @@
  });
 
  
-var apolloServer=new ApolloServer({typeDefs,resolvers,dataSources});
+var apolloServer=new ApolloServer({
+    typeDefs,
+    resolvers,
+    dataSources,
+    debug:false
+});
 apolloServer.listen({
  port:process.env.port || 4000
 }).then((serverInfo)=>{
