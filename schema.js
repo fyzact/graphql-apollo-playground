@@ -7,7 +7,7 @@ type Query{
     description:String
     startAt:String
     endsAt:String
-    room:String
+    room:Room
     day:String
     format:String
     track:String
@@ -25,7 +25,7 @@ input SessionInput{
     description:String
     startAt:String
     endsAt:String
-    room:String
+    room:Room
     day:String
     format:String
     favorite:Boolean
@@ -36,13 +36,18 @@ type Mutation{
     toogleFavoriteSession(id:ID):Session
     addNewSession(session:SessionInput):Session
 }
+enum Room{
+    EUROPA
+    SOL
+    SATURN
+}
 type Session{
     id:ID!
     title:String! 
     description:String
     startAt:String
     endsAt:String
-    room:String
+    room:Room
     day:String
     format:String
     favorite:Boolean
