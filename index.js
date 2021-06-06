@@ -22,6 +22,7 @@ var apolloServer=new ApolloServer({
             
             return new ApolloError("we are having some trouble","ERROR",{correlationId:"uniqueId"});
         }
+        return err;
     }
 });
 apolloServer.listen({

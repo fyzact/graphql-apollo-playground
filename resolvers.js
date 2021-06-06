@@ -7,5 +7,16 @@ module.exports={
     Query,
     Session,
     Mutation,
-    Room
+    Room,
+    SessionOrError:{
+        __resolveType(obj){
+            if(obj.code){
+            return  'CustomError' 
+            }else{
+
+               return 'Session';
+
+            }
+        }
+    }
  };

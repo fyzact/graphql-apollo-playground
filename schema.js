@@ -14,7 +14,7 @@ type Query{
     level:String
 
     ):[Session]
-   sessionById (id:ID): Session
+   sessionById (id:ID): SessionOrError
    speakers:[Speaker]
    speakerById(id:ID):Speaker
 
@@ -36,11 +36,17 @@ type Mutation{
     toogleFavoriteSession(id:ID):Session
     addNewSession(session:SessionInput):Session
 }
+type CustomError{
+    code:String,
+    message:String,
+    token:String
+}
 enum Room{
     EUROPA
     SOL
     SATURN
 }
+union SessionOrError=Session | CustomError
 type Session{
     id:ID!
     title:String! 
